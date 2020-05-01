@@ -1,0 +1,86 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"enablePullDownRefresh":true
+		}
+	}, {
+		"path": "pages/discovery/discovery",
+		"style": {
+			"navigationBarTitleText": "发现",
+			"app-plus": {
+				"titleNView": {
+					"type": "transparent",//透明渐变导航栏 App-nvue 2.4.4+ 支持
+					"searchInput": {
+						"backgroundColor": "#fff",
+						"borderRadius": "6px", //输入框圆角
+						"placeholder": "请输入搜索内容",
+						"disabled": true //disable时点击输入框不置焦，可以跳到新页面搜索
+					}
+				}
+			}
+		}
+	}, {
+		"path": "pages/notify/notify",
+		"style": {
+			"navigationBarTitleText": "消息"
+		}
+	}, {
+		"path": "pages/profile/profile",
+		"style": {
+			"navigationBarTitleText": "我的"
+		}
+	}],
+	"tabBar": {
+	        "color": "#7A7E83",
+	        "selectedColor": "#3cc51f",
+	        "borderStyle": "black",
+	        "backgroundColor": "#ffffff",
+	        "height": "50px",
+	        "fontSize": "10px",
+	        "iconWidth": "24px",
+	        "spacing": "3px",
+			"position":"bottom",
+	        "list": [{
+	            "pagePath": "pages/index/index",
+				"iconPath": "static/image/index.png",
+				"selectedIconPath": "static/image/index_focus.png",
+	            "text": "首页"
+	        }, {
+	            "pagePath": "pages/discovery/discovery",
+				"iconPath": "static/image/discovery.png",
+				"selectedIconPath": "static/image/discovery_focus.png",
+	            "text": "发现"
+	        }, {
+	            "pagePath": "pages/notify/notify",
+				"iconPath": "static/image/ring.png",
+				"selectedIconPath": "static/image/ring_focus.png",
+	            "text": "消息"
+	        }, {
+	            "pagePath": "pages/profile/profile",
+				"iconPath": "static/image/user1.png",
+				"selectedIconPath": "static/image/user_focus.png",
+	            "text": "我的"
+	        }],
+	        "midButton": {
+	            "width": "80px",
+	            "height": "50px",
+	            "text": "文字",
+	            "iconPath": "static/image/midButton_iconPath.png",
+	            "iconWidth": "24px",
+	            "backgroundImage": "static/image/midButton_backgroundImage.png"
+	        }
+	    },
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "湖北金盛兰",
+		"navigationBarBackgroundColor": "#007AFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"easycom": {
+        "autoscan": true, //是否自动扫描组件
+        "custom": {//自定义扫描规则
+        "uni-(.*)": "@/components/uni-$1/uni-$1.vue"
+	    }
+	}
+}
