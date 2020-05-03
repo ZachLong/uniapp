@@ -1,13 +1,6 @@
 <template>
 <scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" >
-	<view class="search flex-wrp">
-	  <view class="search-left flex-item">
-		  <image src="static/image/search.png"></image>
-		  <input placeholder="搜索话题, 问题或人" placeholder-class="search-placeholder"/>
-	  </view>
-	  <view class="search-right flex-item" bindtap="upper">
-		  <image src="static/image/lighting.png"></image>
-	  </view>
+	  <uni-search-bar placeholder="搜索文章" cancelButton="none" @confirm="search" @input="input" ></uni-search-bar>
 	  <!-- 文字滚动 -->
 	  <uni-notice-bar showClose="true" scrollable="true" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
 	  
@@ -38,21 +31,13 @@
 	>
 	        那是一个秋意盎然、金风送爽的日子，我和父母一起来到了位于上师大旁的康健园。一踏进公园，一股浓郁的桂香扑鼻而来，泌人心脾,让我心旷神怡，只见一朵朵开得正烈的金色桂花，迎风而立，仿佛在向我招手。我们追着这桂香，走进了清幽的公园。
 	</uni-card>
-	<uni-card title="Dcloud" note="true">
-	    默认内容
-	    <template v-slot:footer>
-	        <view class="footer-box">
-	            <view>喜欢</view>
-	            <view>评论</view>
-	            <view>分享</view>
-	        </view>
-	    </template>
-	</uni-card>
-	</view>
+	
 </scroll-view>
 </template>
 <script>
+	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue'
 	export default {
+		components: {uniSearchBar},
 		data() {
 			return {
 				href: 'https://uniapp.dcloud.io/component/README?id=uniui'
