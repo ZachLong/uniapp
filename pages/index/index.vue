@@ -1,97 +1,209 @@
 <template>
-<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" >
-	  <uni-search-bar placeholder="搜索文章" cancelButton="none" @confirm="search" @input="input" ></uni-search-bar>
-	  <!-- 文字滚动 -->
-	  <uni-notice-bar showClose="true" scrollable="true" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
-	  
-	  <!-- 查看更多 -->
-	   <uni-notice-bar @getmore="getMore" :showGetMore="true" moreText="查看更多" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
-	  <uni-card title="这是一段非常长的标题文字,这是一段极度长的标题文字,这是一段极端长的标题文字" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="额外信息" note="Tips">
-	      内容主体，可自定义内容及样式
-	  </uni-card>
-	  <uni-card is-full=true title="这是一段非常长的标题文字,这是一段极度长的标题文字,这是一段极端长的标题文字" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="2018.12.12" >
-	      <image src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg" style="width: 100%;"></image>
-	  </uni-card>
-	<uni-card 
-	    title="Dcloud" 
-	    mode="title" 
-	    :is-shadow="true" 
-	    thumbnail="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg" 
-	    extra="技术没有上限" 
-	    note="Tips"
-	>那是一个秋意盎然、金风送爽的日子,我和父母一起来到了位于上师大旁的康健园.一踏进公园,一股浓郁的桂香扑鼻而来,泌人心脾,让我心旷神怡,只见一朵朵开得正烈的金色桂花,迎风而立,仿佛在向我招手.我们追着这桂香,走进了清幽的公园.
-	</uni-card>
-	<uni-card
-	    title="标题文字"
-	    mode="style"
-	    :is-shadow="true"
-	    thumbnail="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg"
-	    extra="Dcloud 2019-05-20 12:32:19"
-	    note="Tips"
-	>
-	        那是一个秋意盎然、金风送爽的日子，我和父母一起来到了位于上师大旁的康健园。一踏进公园，一股浓郁的桂香扑鼻而来，泌人心脾,让我心旷神怡，只见一朵朵开得正烈的金色桂花，迎风而立，仿佛在向我招手。我们追着这桂香，走进了清幽的公园。
-	</uni-card>
-	
-</scroll-view>
+		<view class="container999" @touchstart="refreshStart" @touchmove="refreshMove" @touchend="refreshEnd">
+			<!-- 刷新组件需搭配scroll-view使用，并在pages.json中添加 "disableScroll":true-->
+			<refresh ref="refresh" @isRefresh='isRefresh'></refresh>
+			<view class='nav'>
+				<!-- #ifdef H5 -->
+					<view style="height: 44px;width: 100%;">边距盒子</view>
+				<!-- #endif -->
+				<!-- 搜索 -->
+				<view class='searchInput999'>
+					<view class='searchBox999'>
+						<image src='/static/icon-search.png' class='search999'></image>
+					</view>
+					<input class='input999' placeholder="输入关键词"></input>
+				</view>
+				<!-- 导航栏 agents导航栏标题 -->
+				<navTab ref="navTab" :tabTitle="tabTitle" @changeTab='changeTab'></navTab>
+			</view>
+			<!-- swiper切换 swiper-item表示一页 scroll-view表示滚动视窗 -->
+			<swiper style="min-height: 100vh;" :current="currentTab" @change="swiperTab">
+				<swiper-item v-for="(listItem,listIndex) in list" :key="listIndex">
+					<scroll-view style="height: 100%;" scroll-y="true" @scrolltolower="lower1" scroll-with-animation :scroll-into-view="toView">
+					<view :id="'top'+listIndex" style="width: 100%;height: 180upx;">边距盒子</view>
+					<view class='content'>
+						<view class='card' v-for="(item,index) in listItem" v-if="listItem.length > 0" :key="index">
+							{{item}}
+						</view>
+					</view>
+					<view class='noCard' v-if="listItem.length===0">
+						暂无信息
+					</view>
+					<view style="width: 100%;height: 100upx;opacity:0;">底部占位盒子</view>
+					</scroll-view>
+				</swiper-item>
+			</swiper>
+		</view>
 </template>
 <script>
-	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue'
+	const util = require('@/util/util.js');
+	import refresh from '@/components/refresh.vue';
+	import navTab from '@/components/navTab.vue';
 	export default {
-		components: {uniSearchBar},
+		components: {refresh,navTab},
 		data() {
 			return {
-				href: 'https://uniapp.dcloud.io/component/README?id=uniui'
+				currentPage:'index',
+				toView:'',//回到顶部id
+				tabTitle:['推荐','问答','交易','拼车','新闻','其它'], //导航栏格式 --导航栏组件
+				currentTab: 0, //swiper所在页
+				pages:[1,1,1,1,1,1], //第几个swiper的第几页
+				list: [[1, 2, 3, 4, 5, 6],['a', 'b', 'c', 'd', 'e', 'f'],[],['2233','4234','13144','324244'],[],[]] //数据格式
 			}
 		},
 		methods: {
-			
-		}
+				toTop(){
+					this.toView = ''
+					setTimeout(()=>{
+						this.toView = 'top' + this.currentTab
+					},10)
+				},
+				changeTab(index){
+					this.currentTab = index;
+				},
+				// 其他请求事件 当然刷新和其他请求可以写一起 多一层判断。
+				isRequest() {
+					return new Promise((resolve, reject) => {
+						this.pages[this.currentTab]++
+						var that = this
+						setTimeout(() => {
+							uni.hideLoading()
+							uni.showToast({
+								icon: 'none',
+								title: `请求第${that.currentTab + 1 }个导航栏的第${that.pages[that.currentTab]}页数据成功`
+							})
+							let newData = ['新数据1','新数据2','新数据3']
+							resolve(newData)
+						}, 1000)
+					})
+				},
+				// swiper 滑动
+				swiperTab: function(e) {
+					var index = e.detail.current //获取索引
+					this.$refs.navTab.longClick(index);
+				},
+				// 加载更多 util.throttle为防抖函数
+				lower1: util.throttle(function(e) {
+				console.log(`加载${this.currentTab}`)//currentTab表示当前所在页数 根据当前所在页数发起请求并带上page页数
+				uni.showLoading({
+					title: '加载中',
+					mask:true
+				})
+					this.isRequest().then((res)=>{
+						let tempList = this.list
+						tempList[this.currentTab] = tempList[this.currentTab].concat(res)
+						console.log(tempList)
+						this.list = tempList
+						this.$forceUpdate() //二维数组，开启强制渲染
+					})
+				}, 300),
+				// 刷新touch监听
+				refreshStart(e) {
+					this.$refs.refresh.refreshStart(e);
+				},
+				refreshMove(e){
+					this.$refs.refresh.refreshMove(e);
+				},
+				refreshEnd(e) {
+					this.$refs.refresh.refreshEnd(e);
+				},
+				isRefresh(){
+						setTimeout(() => {
+							uni.showToast({
+								icon: 'success',
+								title: '刷新成功'
+							})
+							this.$refs.refresh.endAfter() //刷新结束调用
+						}, 1000)
+				}
+			}
+
 	}
 </script>
 
-<style>
-	.container{
-	  height: 1500rpx;
+<style lang="scss">
+	.container999 {
+		width: 100vw;
+		font-size: 28upx;
+		min-height: 100vh;
+		overflow: hidden;
+		color: #6B8082;
+		position: relative;
+		background-color: #f6f6f6;
 	}
-	.container .search{
-	  width: 735rpx;
-	  height: 65rpx;
-	  padding: 12.5rpx 0 12.5rpx 15rpx;
-	  background: #2A8CE5;
+
+	.content {
+		width: 100%;
 	}
-	.container .search-left{
-	  flex: 8;
-	  background: #4EA3E7;
-	  text-align: left;
+
+	.card {
+		width: 90%;
+		height: 368upx;
+		background-color: white;
+		margin: 0 auto 42upx auto;
+		background: #FFFFFF;
+		box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.10);
+		border-radius: 5px;
+		position: relative;
 	}
-	.container .search-left input{
-	  display: inline-block;
-	  height: 65rpx;
-	  font-size: 26rpx;
+
+	.noCard {
+		width: 90%;
+		height: 200upx;
+		margin: auto;
+		background-color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #999999;
+		box-shadow: 0 0 10upx 0 rgba(0, 0, 0, 0.10);
+		border-radius: 10upx;
 	}
-	.search-placeholder{
-	  color: #8CCEFD;
-	  line-height: 20rpx;
+
+
+	.nav {
+		position: fixed;
+		left: 0;
+		top: 0;
+		color: white;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+		font-size: 24upx;
+		background-color: #007AFF;
+		z-index: 996;
 	}
-	.container .search .search-left image{
-	  display: inline-block;
-	  width: 35rpx;
-	  height: 35rpx;
-	  padding: 15rpx 15rpx 15rpx 20rpx;
+
+	.searchInput999 {
+		width: 90%;
+		margin: 0 auto;
+		background: white;
+		border-radius: 30upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 56upx;
 	}
-	.container .search .search-right{
-	  flex: 1;
+
+	.search999 {
+		width: 32upx;
+		height: 32upx;
 	}
-	.container .search .search-right image{
-	  width: 45rpx;
-	  height: 45rpx;
-	  padding: 10rpx;
+
+	.searchBox999 {
+		width: 56upx;
+		height: 56upx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
-	
-	.container{
-	  padding: 0;
-	  font-size: 14rpx;
-	  background: #F0F4F3;
-	  color: #000;
+
+	.input999 {
+		color: #999;
+		width: 80%;
 	}
 </style>
+
+

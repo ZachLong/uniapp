@@ -1,5 +1,10 @@
 <template>
-	<text :style="{ color: color, 'font-size': size + 'px' }" class="uni-icons" @click="_onClick">{{icons[type]}}</text>
+	<view class="icon-item">
+		<text :style="{ color: color}" class="uni-icons" @click="_onClick" >{{icons[type]}}</text>
+		<text :style="{ 'color': 'rgb(143, 143, 148)'}" class="icon-item-text" >
+			<slot />
+		</text>
+	</view>
 </template>
 
 <script>
@@ -59,9 +64,23 @@
 
 	/* #endif */
 
+	.icon-item {
+		display: flex;
+		box-sizing: border-box;
+		padding: 14% 0 14% 0;
+		flex-direction: column;
+		height: 100%;
+	}
 	.uni-icons {
 		font-family: uniicons;
 		text-decoration: none;
 		text-align: center;
+		font-size: calc(100vw/10);
+	}
+
+	.icon-item-text {
+		font-size: calc(100vw/25);
+		text-align: center;
+		margin-top: 0;
 	}
 </style>
