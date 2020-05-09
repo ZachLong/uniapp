@@ -48,7 +48,7 @@
 			goLogin() {
 				if (!this.login) {
 					uni.navigateTo({
-						url: '../login/login?id=1'
+						url: '../login/login'
 					});
 				}
 			}
