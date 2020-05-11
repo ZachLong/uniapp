@@ -81,12 +81,12 @@
 			},
 			isFull: {
 				// 内容区域是否通栏
-				type: Boolean,
+				type: [Boolean,String],
 				default: false
 			},
 			isShadow: {
 				// 是否开启阴影
-				type: Boolean,
+				type: [Boolean,String],
 				default: false
 			}
 		},

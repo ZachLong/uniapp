@@ -14,10 +14,16 @@
 			<uni-grid-item>
 				<uni-icons type="chat-filled" color="#426ab3">通知</uni-icons>
 			</uni-grid-item>
-			<navigator url="../test/test" hover-class="navigator-hover">
-				<button type="default">跳转到新页面</button>
-			</navigator>
 		</uni-grid>
+		<navigator url="../test/test" hover-class="navigator-hover">
+			<button type="default">跳转到新页面</button>
+		</navigator>
+		<navigator url="../test/test" open-type="redirect" hover-class="other-navigator-hover">
+			<button type="default">在当前页打开</button>
+		</navigator>
+		<navigator url="../test/test" open-type="switchTab" hover-class="other-navigator-hover">
+			<button type="default">跳转tab页面</button>
+		</navigator>
 	</view>
 </template>
 
