@@ -40,6 +40,11 @@
 		"style": {
 			"navigationBarTitleText": "测试"
 		}
+	}, {
+		"path": "pages/article/article",
+		"style": {
+			"navigationBarTitleText": "文章"
+		}
 	}],
 	"tabBar": {
 		"color": "#7A7E83",

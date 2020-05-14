@@ -28,39 +28,10 @@
 				<scroll-view style="height: 100%;" scroll-y="true" @scrolltolower="lower1" scroll-with-animation :scroll-into-view="toView">
 					<view :id="'top'+listIndex" style="width: 100%;height: 180rpx;">边距盒子</view>
 					<view class='content'>
-						<!-- 一般用法 -->
-						<uni-card title="标题文字" is-shadow=true thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="额外信息" note="Tips">
-							内容主体，可自定义内容及样式
-						</uni-card>
-
-						<!-- 内容通栏 -->
-						<uni-card is-full=true title="DCloud" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="2018.12.12">
-							<image src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg" style="width: 100%;"></image>
-						</uni-card>
-
-						<!-- 图文卡片模式 -->
-						<uni-card title="标题文字" mode="style" :is-shadow="true" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg"
-						 extra="Dcloud 2019-05-20 12:32:19" note="Tips">
-							那是一个秋意盎然、金风送爽的日子，我和父母一起来到了位于上师大旁的康健园。一踏进公园，一股浓郁的桂香扑鼻而来，泌人心脾,让我心旷神怡，只见一朵朵开得正烈的金色桂花，迎风而立，仿佛在向我招手。我们追着这桂香，走进了清幽的公园。
-						</uni-card>
-
-						<!-- 标题卡片模式 -->
-						<uni-card title="Dcloud" mode="title" :is-shadow="true" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg"
-						 extra="技术没有上限" note="Tips">
-							那是一个秋意盎然、金风送爽的日子,我和父母一起来到了位于上师大旁的康健园.一踏进公园,一股浓郁的桂香扑鼻而来,泌人心脾,让我心旷神怡,只见一朵朵开得正烈的金色桂花,迎风而立,仿佛在向我招手.我们追着这桂香,走进了清幽的公园.
-						</uni-card>
-
-						<!-- 自定义底部按钮 -->
-						<uni-card title="Dcloud" note="true">
-							默认内容
-							<template v-slot:footer>
-								<view class="footer-box">
-									<view>喜欢</view>
-									<view>评论</view>
-									<view>分享</view>
-								</view>
-							</template>
-						</uni-card>
+						<article-card :url="url" title="这是一段很长的标题1,这是一段很长的标题2,这是一段很长的标题3,这是一段很长的标题4" author="作者名称" ></article-card>
+						<article-card :url="url" title="这是一段很长的标题1,这是一段很长的标题2,这是一段很长的标题3,这是一段很长的标题4" author="作者名称" mode="triple" :imageList="imageList"></article-card>						
+						<article-card :url="url" title="这是一段很长的标题1,这是一段很长的标题2,这是一段很长的标题3,这是一段很长的标题4" author="作者名称" mode="single" path="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg"></article-card>
+						<article-card :url="url" title="这是一段很长的标题1,这是一段很长的标题2,这是一段很长的标题3,这是一段很长的标题4" author="作者名称" mode="large" path="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg"></article-card>
 						<!-- 						<view class='card' v-for="(item,index) in listItem" v-if="listItem.length > 0" :key="index">
 							{{item}}
 						</view> -->
@@ -79,16 +50,17 @@
 	import refresh from '@/components/refresh.vue';
 	import navTab from '@/components/navTab.vue';
 	import uniIcons from "@/components/uni-icons/uni-icons.vue"
-	import uniCard from '@/components/uni-card/uni-card.vue'
+	import ArticleCard from "@/components/article-card/article-card.vue"
 	export default {
 		components: {
 			refresh,
 			navTab,
 			uniIcons,
-			uniCard
+			ArticleCard
 		},
 		data() {
 			return {
+				url: '../../pages/article/article',
 				currentPage: 'index',
 				toView: '', //回到顶部id
 				tabTitle: ['推荐', '问答', '公告', '拼车', '交易', '新闻', '其他'], //导航栏格式 --导航栏组件
@@ -101,7 +73,12 @@
 					['2233', '4234', '13144', '324244'],
 					[],
 					[]
-				] //数据格式
+				], //数据格式
+				imageList: [
+					{path: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg'},
+					{path: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg'},
+					{path: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg'}
+				]
 			}
 		},
 		methods: {
