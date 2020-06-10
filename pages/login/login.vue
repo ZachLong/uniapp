@@ -7,29 +7,22 @@
 			</view>
 			<!-- 主体表单 -->
 			<view class="main">
-				<wInput v-model="phoneData" type="text" maxlength="11" placeholder="用户名/电话"></wInput>
+				<wInput v-model="phoneData" type="text" maxlength="11" placeholder="账号"></wInput>
 				<wInput v-model="passData" type="password" maxlength="11" placeholder="密码"></wInput>
 			</view>
 			<wButton text="登 录" :rotate="isRotate" @click.native="startLogin()" class="wbutton"></wButton>
-
 			<!-- 其他登录 -->
 			<view class="other_login cuIcon">
 				<view class="login_icon">
 					<view class="cuIcon-weixin" @tap="login_weixin"></view>
 				</view>
-				<view class="login_icon">
-					<view class="cuIcon-weibo" @tap="login_weibo"></view>
-				</view>
-				<view class="login_icon">
-					<view class="cuIcon-github" @tap="login_github"></view>
-				</view>
 			</view>
 
 			<!-- 底部信息 -->
 			<view class="footer">
-				<navigator url="forget" open-type="navigate">找回密码1</navigator>
+				<navigator url="forget" open-type="navigate">找回密码</navigator>
 				<text>|</text>
-				<navigator url="register" open-type="navigate">注册账号2</navigator>
+				<navigator url="register" open-type="navigate">注册账号</navigator>
 			</view>
 		</view>
 	</view>
@@ -59,7 +52,11 @@
 			//this.isLogin();
 		},
 		onLoad: function(option) { //option为object类型，会序列化上个页面传递的参数
-			console.log(option.id); //打印出上个页面传递的参数。
+			uni.showToast({
+				icon: 'none',
+				position: 'bottom',
+				title: '请输入账号和密码'
+			});
 		},
 		methods: {
 			isLogin() {

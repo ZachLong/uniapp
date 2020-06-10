@@ -1,0 +1,97 @@
+
+@media screen and (min-width: 375px) .article_header .article_title {
+	font-size: 24px;
+	line-height: 34px;
+}
+@media screen and (min-width: 360px) .article_header .article_title {
+	font-size: 23px;
+	line-height: 31px;
+}
+@media screen and (min-width: 320px) .article_header .article_title {
+	font-size: 21px;
+	line-height: 30px;
+}
+.article_header .article_title {
+	font-family: 'PingFangSC-Medium';
+	line-height: 1.36;
+	font-weight: 500;
+	color: #222222;
+	font-size: 22px;
+}
+.article_header .article_author {
+	position: relative;
+	margin-top: 12px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.article_header .article_author .header-left {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.article_header .article_author .avatar {
+	width: 24px;
+	height: 24px;
+	border-radius: 24px;
+	margin: auto;
+	display: inline-block;
+}
+.article_header .article_author .avatar image {
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+}
+.article_header .article_author .author-info {
+	margin-left: 6px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.article_header .article_author .author-info .author-name {
+	font-size: 14px;
+	color: #222;
+	font-weight: 700;
+	margin-right: 6px;
+}
+.article_header .article_author .author-info .v-info {
+    width: 14px;
+    height: 14px;
+    background-size: 100% 100%;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: -2px;
+}
+.article_header .article_author .author-info .v-info.v-0 {
+    background-image: url(//s1.pstatp.com/growth/mobile_detail/image/v-0.tl0z9x5L.png);
+}
+.article_header .article_author .header-right {
+	-webkit-align-self: center;
+	        align-self: center;
+	color: #999999;
+}
+.article_header .article_author .header-right text {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 16px;
+}
+.article_header .article_author .header-right .dot {
+	display: inline-block;
+	width: 2px;
+	height: 2px;
+	border-radius: 1px;
+	background-color: #999;
+	margin: 0 4px;
+	vertical-align: middle;
+}
+

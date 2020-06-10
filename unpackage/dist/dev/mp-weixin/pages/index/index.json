@@ -1,4 +1,10 @@
 {
-  "navigationBarTitleText": "uni-ui基础项目",
-  "usingComponents": {}
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "refresh": "/components/refresh",
+    "fa-icon": "/components/fa-icon/fa-icon",
+    "article-card": "/components/article-card/article-card",
+    "nav-tab": "/components/navTab",
+    "uni-icons": "/components/uni-icons/uni-icons"
+  }
 }

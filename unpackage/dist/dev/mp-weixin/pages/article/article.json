@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "文章",
+  "usingComponents": {
+    "article-detail": "/components/article-detail/article-detail"
+  }
+}

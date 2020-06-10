@@ -1,0 +1,1 @@
+<view><article-detail vue-id="9fa026dc-1" title="{{detailData.title}}" author="{{detailData.author}}" bind:__l="__l"></article-detail><rich-text nodes="{{detailData.flow}}"></rich-text></view>

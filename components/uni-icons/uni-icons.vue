@@ -1,10 +1,5 @@
 <template>
-	<view class="icon-item">
-		<text :style="{ color: color}" class="uni-icons" @click="_onClick" >{{icons[type]}}</text>
-		<text :style="{ color: textColor}" class="icon-item-text" >
-			<slot />
-		</text>
-	</view>
+	<text :style="{ color: color, 'font-size': size + 'px' }" class="uni-icons" @click="_onClick">{{icons[type]}}</text>
 </template>
 
 <script>
@@ -40,14 +35,6 @@
 			size: {
 				type: [Number, String],
 				default: 16
-			},
-			textColor: {
-				type:String,
-				default: 'rgb(143, 143, 148)'
-			},
-			textSize: {
-				type: [Number, String],
-				default: 16
 			}
 		},
 		data() {
@@ -63,7 +50,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	/* #ifndef APP-NVUE */
 	@font-face {
 		font-family: uniicons;
@@ -72,22 +59,9 @@
 
 	/* #endif */
 
-	.icon-item {
-		display: flex;
-		box-sizing: border-box;
-		padding: 14% 0 14% 0;
-		flex-direction: column;
-		height: 100%;
-	}
 	.uni-icons {
 		font-family: uniicons;
 		text-decoration: none;
 		text-align: center;
-		font-size: calc(100vw/10);
-	}
-	.icon-item-text {
-		text-align: center;
-		margin-top: 0;
-		font-size: calc(100vw/25);
 	}
 </style>

@@ -51,6 +51,7 @@
 	import navTab from '@/components/navTab.vue';
 	import uniIcons from "@/components/uni-icons/uni-icons.vue"
 	import ArticleCard from "@/components/article-card/article-card.vue"
+	import {mapState, mapMutations} from 'vuex'
 	export default {
 		components: {
 			refresh,
@@ -81,7 +82,10 @@
 				]
 			}
 		},
-		methods: {
+		computed:{
+			...mapState(['avatarUrl', 'login', 'userInfo'])
+		},
+		methods: {			
 			toTop() {
 				this.toView = ''
 				setTimeout(() => {

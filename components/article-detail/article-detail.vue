@@ -73,7 +73,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	@media screen and (min-width: 375px) .article_header .article_title {
 		font-size: 24px;
 		line-height: 34px;

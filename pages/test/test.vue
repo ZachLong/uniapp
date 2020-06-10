@@ -4,7 +4,6 @@
 		<article-card title="这是一段很长的标题1,这是一段很长的标题12,这是一段很长的标题3,这是一段很长的标题4" author="作者龙泽权" mode="large" path="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg"></article-card>
 		<article-card title="这是一段很长的标题1,这是一段很长的标题12,这是一段很长的标题3,这是一段很长的标题4" author="作者龙泽权" mode="triple" :imageList="imageList"></article-card>
 		<article-card title="这是一段很长的标题1,这是一段很长的标题12,这是一段很长的标题3,这是一段很长的标题4" author="作者龙泽权" mode="single" path="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg"></article-card>
-		
 	</view>
 </template>
 

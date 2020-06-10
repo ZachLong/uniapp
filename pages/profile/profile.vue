@@ -1,9 +1,9 @@
 <template>
 	<view>
 		<view class="logo" @click="goLogin" :hover-class="!login ? 'logo-hover' : ''">
-			<image class="logo-img" :src="login ? uerInfo.avatarUrl :avatarUrl"></image>
+			<image class="logo-img" :src="login ? avatarUrl :avatarUrl"></image>
 			<view class="logo-title">
-				<text class="user-name">Hi，{{login ? uerInfo.name : '您未登录'}}</text>
+				<text class="user-name">Hi，{{login ? userInfo.nickname : '您未登录'}}</text>
 				<text class="go-login navigat-arrow" v-if="!login">&#xe65e;</text>
 			</view>
 		</view>
@@ -32,17 +32,14 @@
 <script>
 	import uniList from "@/components/uni-list/uni-list.vue"
 	import uniListItem from "@/components/uni-list-item/uni-list-item.vue"
+	import {mapState, mapMutations} from 'vuex'
 	export default {
 		components: {
 			uniList,
 			uniListItem
 		},
-		data() {
-			return {
-				login: false,
-				avatarUrl: "../../static/user.png",
-				uerInfo: {}
-			}
+		computed:{
+			...mapState(['avatarUrl', 'login', 'userInfo'])
 		},
 		methods: {
 			goLogin() {
@@ -51,11 +48,11 @@
 						url: '../login/login'
 					});
 				}
-			}
+			},
+			...mapMutations(['logout'])
 		},
 		onLoad: function(option) { //option为object类型，会序列化上个页面传递的参数
-			console.log(option.id); //打印出上个页面传递的参数。
-			console.log(option.name); //打印出上个页面传递的参数。
+			console.log(option); 
 		}
 	}
 </script>
